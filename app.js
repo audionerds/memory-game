@@ -118,6 +118,7 @@ function resetBoard() {
 function restart() {
   if (intervalId) {
     clearInterval(intervalId);
+    intervalId = null;
   }
 
   resetBoard();

@@ -68,6 +68,9 @@ function flipCard() {
   secondCard = this;
   lockBoard = true;
 
+  score++;
+  document.querySelector(".score").textContent = score;
+
   checkForMatch();
 }
 
@@ -77,23 +80,31 @@ function checkForMatch() {
 
   if (isMatch) {
     disableCards();
-    score++;
-    document.querySelector(".score").textContent = score;
 
     //check if all cards have been matched
-    if (score === cards.length / 2) {
+    let allCards = document.querySelectorAll(".card");
+    let allCardsMatched = Array.from(allCards).every((card) =>
+      card.classList.contains("disabled")
+    );
+
+    if (allCardsMatched) {
       alert("Congratulations! You've matched all of the cards!!!");
       clearInterval(intervalId);
+      updateLowestScores(score);
+      displayLowestScores();
     }
   } else {
     unflipCards();
   }
 }
 
-// diable cards
+// disable cards
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
+
+  firstCard.classList.add("disabled");
+  secondCard.classList.add("disabled");
 
   resetBoard();
 }
@@ -114,7 +125,7 @@ function resetBoard() {
   lockBoard = false;
 }
 
-// The restart function starts the game using the resetBoard function, shuffles the cards, resets the score, clears the grid & generates new cards for the game.
+// Starts the game, shuffles, resets the score, clears the grid, & generates new cards for the game.
 function restart() {
   if (intervalId) {
     clearInterval(intervalId);
@@ -142,3 +153,43 @@ function startStopwatch() {
     }, 1000);
   }
 }
+
+// update the lowest score list
+function updateLowestScores(score) {
+  let lowestScores = JSON.parse(localStorage.getItem("lowestScores")) || [];
+  console.log("Before update:", lowestScores);
+  lowestScores.push(score);
+  lowestScores = [...new Set(lowestScores)];
+  lowestScores.sort((a, b) => a - b);
+  if (lowestScores.length > 5) {
+    lowestScores.length = 5;
+  }
+  console.log("After update:", lowestScores);
+  localStorage.setItem("lowestScores", JSON.stringify(lowestScores));
+}
+
+// displays the scores in the list
+function displayLowestScores() {
+  let lowestScores = JSON.parse(localStorage.getItem("lowestScores")) || [];
+  let scoreElements = document.querySelectorAll("#lowest-scores .score");
+
+  for (let i = 0; i < 3; i++) {
+    if (lowestScores[i] !== undefined) {
+      scoreElements[i].textContent = `Score ${i + 1}: ${lowestScores[i]}`;
+    } else {
+      scoreElements[i].textContent = `Score ${i + 1}: -`;
+    }
+  }
+}
+
+// clear scores
+function clearAllScores() {
+  localStorage.removeItem("lowestScores");
+  displayLowestScores();
+  console.log(
+    "Thats it boss, they're fineto. I took care of 'em; you don't have to worry anymore."
+  );
+}
+
+//display scores when page loads
+displayLowestScores();

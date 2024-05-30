@@ -94,3 +94,13 @@ p {
   background-position: center center;
   background-size: cover;
 }
+
+#lowest-scores {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.score {
+  margin: 20px;
+}

@@ -13,20 +13,25 @@
   </head>
 
   <body>
-    <h1>
-      &#9760;&#9760;&#9760;&#9760;&#9760;&#9760;&#9760;&#9760;&#9760; Memory
-      Game &#9760;&#9760;&#9760;&#9760;&#9760;&#9760;&#9760;&#9760;&#9760;
-    </h1>
+    <h1>&#9760;&#9760;&#9760; Memory Game &#9760;&#9760;&#9760;</h1>
 
     <div class="grid-container"></div>
 
     <p>Score: <span class="score"></span></p>
 
-    <p id="stopwatch">0</p>
+    <p id="stopwatch">Stopwatch: 0</p>
 
     <div class="actions">
       <button onclick="restart()">Restart</button>
     </div>
+
+    <p>Lowest Scores: <span class="lowest-scores"></span></p>
+    <div id="lowest-scores">
+      <p class="score">Score 1</p>
+      <p class="score">Score 2</p>
+      <p class="score">Score 3</p>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>

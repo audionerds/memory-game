@@ -7,9 +7,10 @@ let score = 0;
 let time = 0;
 let intervalId;
 
+// Initialize score display
 document.querySelector(".score").textContent = score;
 
-// fetch gets the card information from the JSON, duplicates it and shuffles the cards and generates it on the screen
+// Fetch card data from JSON, duplicate it, shuffle the cards, and generate them on the screen
 fetch("./data/cards.json")
   .then((res) => res.json())
   .then((data) => {
@@ -18,7 +19,7 @@ fetch("./data/cards.json")
     generateCards();
   });
 
-// shuffle function
+// Function to shuffle the cards
 function shuffleCards() {
   let currentIndex = cards.length,
     randomIndex,
@@ -32,7 +33,7 @@ function shuffleCards() {
   }
 }
 
-// create cards
+// Function to generate the cards on the screen
 function generateCards() {
   for (let card of cards) {
     const cardElement = document.createElement("div");

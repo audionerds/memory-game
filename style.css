@@ -57,19 +57,19 @@ p {
   transition: all 0.5s ease-in-out;
 }
 
-/* style for the front image */
+/* Style for the front image of the card */
 .front-image {
   transform: rotateY(180deg);
   width: 60px;
   height: 60px;
 }
 
-/* style for the flipped */
+/* Style for the card when it's flipped */
 .card.flipped {
   transform: rotateY(180deg);
 }
 
-/* style for the visibility of the card */
+/* Style for the visibility of the card's front and back */
 .front,
 .back {
   backface-visibility: hidden;
@@ -81,14 +81,14 @@ p {
   width: 100%;
 }
 
-/* style for the card front*/
+/* Style for the front of the card */
 .card .front {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* style for the card back*/
+/* Style for the back of the card */
 .card .back {
   background-image: url(pattern.svg);
   background-position: center center;
@@ -99,8 +99,32 @@ p {
   display: flex;
   justify-content: center;
   flex-direction: row;
+  margin-bottom: 60px;
 }
 
 .score {
   margin: 20px;
+}
+
+#banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  z-index: 1000;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+#banner img {
+  height: 60px;
+  margin-right: 10px;
+}
+
+#banner p {
+  font-size: 16px;
+  font-weight: bold;
 }

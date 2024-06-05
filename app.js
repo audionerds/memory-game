@@ -15,8 +15,12 @@ fetch("./data/cards.json")
   .then((res) => res.json())
   .then((data) => {
     cards = [...data, ...data];
+    console.log("Cards data:", cards); // Log cards data
     shuffleCards();
     generateCards();
+  })
+  .catch((error) => {
+    console.error("Error loading cards data:", error);
   });
 
 // Function to shuffle the cards
@@ -36,6 +40,7 @@ function shuffleCards() {
 // Function to generate the cards on the screen
 function generateCards() {
   for (let card of cards) {
+    console.log("Generating card:", card); // Log each card being generated
     const cardElement = document.createElement("div");
     cardElement.classList.add("card");
     cardElement.setAttribute("data-name", card.name);

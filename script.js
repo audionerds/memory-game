@@ -98,14 +98,8 @@ function handleCardClick(event) {
       updateScoreDisplay();
       // resets backgroundColor and classLists. Unlocks the board and resets firstCard to no value
       setTimeout(() => {
-        firstCard.style.backgroundImage = svgBackground;
-        firstCard.style.backgroundColor = ""; //resets background color to an empty string
-        firstCard.classList.remove("flipped"); //removes class flipped
-        currentCard.style.backgroundImage = svgBackground;
-        currentCard.style.backgroundColor = ""; //resets background color to an empty string
-        currentCard.classList.remove("flipped"); //removes class flipped
-
         firstCard = null; //reset the first card for next turn
+        currentCard = null;
         lockBoard = false; // unlocks the gameboard
       }, 1000);
     }
@@ -142,7 +136,7 @@ function restartGame() {
 
   //reset game variables
   firstCard = null;
-  secondCard = null;
+  currentCard = null;
   lockBoard = false;
   matchedCardsCount = 0; //restarts matched pair count
   resetScore(); //resets the score display

@@ -1,5 +1,5 @@
 const gameContainer = document.getElementById("game");
-const svgBackground = "url(cardback.svg)";
+const svgBackground = "url('cardback.svg')";
 const COLORS = [
   "red",
   "blue",
@@ -55,7 +55,6 @@ let score = 0;
 // TODO: Implement this function!
 function handleCardClick(event) {
   if (lockBoard) return; //prevents action if the board is locked
-  // if (currentCard === firstCard) return; // Prevent score increment if the same card is clicked
   startTimer();
   console.log("you just clicked", event.target);
 
@@ -82,7 +81,7 @@ function handleCardClick(event) {
       firstCard.classList.add("matched"); // add the "matched" class
       currentCard.classList.add("matched"); // add the "matched" class
       firstCard = null; // reset the first card for next turn
-      score++; // Increment score for each match attempt
+      score++; // Increment score for each match
       updateScoreDisplay();
       if (matchedCardsCount === COLORS.length) {
         stopTimer();
@@ -94,13 +93,16 @@ function handleCardClick(event) {
       // if no match removes flipped class after a small delay
       console.log("No Match!"); // if not match log no match
       lockBoard = true; // lock the game board to prevent clicking
-      score++; // Increment score for each match attempt
-      updateScoreDisplay();
       // resets backgroundColor and classLists. Unlocks the board and resets firstCard to no value
       setTimeout(() => {
+        firstCard.style.backgroundColor = "";
+        firstCard.style.backgroundImage = svgBackground;
+        firstCard.classList.remove("flipped");
+        currentCard.style.backgroundColor = "";
+        currentCard.style.backgroundImage = svgBackground;
+        currentCard.classList.remove("flipped");
         firstCard = null; //reset the first card for next turn
-        currentCard = null;
-        lockBoard = false; // unlocks the gameboard
+        lockBoard = false; // unlocks the game board
       }, 1000);
     }
   }
@@ -136,7 +138,6 @@ function restartGame() {
 
   //reset game variables
   firstCard = null;
-  currentCard = null;
   lockBoard = false;
   matchedCardsCount = 0; //restarts matched pair count
   resetScore(); //resets the score display
